@@ -74,3 +74,65 @@ class StringBuilder
       return @str
   end
 end
+
+class StringBuilder
+  def initialize
+    @str = ""
+  end
+
+  def add(str)
+    @str += str
+  end
+
+  def size
+    return @str.length
+  end
+
+  def output
+    return @str
+  end
+end
+
+#string = StringBuilder.new
+#string = string.add('foo')
+#string.output()
+
+class Gratitudes
+  def initialize
+    @gratitudes = []
+  end
+
+  def add(gratitude)
+    @gratitudes.push(gratitude)
+  end
+
+  def format
+    formatted = "Be grateful for: "
+    formatted += @gratitudes.join(", ")
+    return formatted
+  end
+end
+
+#ERROR CHECKING
+
+class Present
+  def wrap(contents)
+    fail "A contents has already been wrapped." unless @contents.nil?
+    @contents = contents
+  end
+
+  def unwrap
+    fail "No contents have been wrapped." if @contents.nil?
+    return @contents
+  end
+end
+
+class PasswordChecker
+  def check(password)
+    if password.length >= 8
+      return true
+    else
+      fail "Invalid password, must be 8+ characters."
+    end
+  end
+end
