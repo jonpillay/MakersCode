@@ -136,3 +136,32 @@ class PasswordChecker
     end
   end
 end
+
+def check_grammar(text)
+  if text[0] !~ /[A-Z]/ || text[-1] !~ /[.?!]/
+    puts "here"
+    return false
+  end
+  
+  if text.scan(/\w[.?!]\s/).size == text.scan(/\w[.?!]\s[A-Z]/).size
+    return true
+  else
+    return false
+  end
+end
+
+#puts check_grammar("This is how you write. blue sentence.")
+
+#puts check_grammar("This is how you write... a sentence. But does this work?")
+
+#puts check_grammar("This is not how you write a sentencE")
+
+def todo_check(text)
+  return text.include?('#TODO')
+end
+
+puts todo_check("Time for the park")
+
+puts todo_check("I have somethings #TODO shopping, #TODO cleaning")
+
+puts todo_check("I have some things to do today")
