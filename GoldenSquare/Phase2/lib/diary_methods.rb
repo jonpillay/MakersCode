@@ -67,7 +67,7 @@ class DiaryEntry
   end
 
   def count_words_diary_entry
-    count_words(self.contents)
+    count_words(@contents)
   end
 
   def reading_time(text, wpm) # wpm is an integer representing the number of words the
@@ -99,27 +99,6 @@ class DiaryEntry
     end
   end
 end
-
-=begin
-
-Tests for reading_chuck
-
-entry = DiaryEntry.new("Gray Monday", "Still Monday, still gray! " * 1000)
-puts entry.count_words_diary_entry
-puts entry.reading_chunk(399, 10).length
-puts entry.reading_chunk(400, 20).length
-puts entry.reading_chunk(399, 10).length
-
-
-entry = DiaryEntry.new("Gray Monday", "Still Monday, still gray! " * 25)
-
-puts entry.count_words_diary_entry
-
-puts entry.reading_chunk(40, 1).split(' ').length
-puts entry.reading_chunk(40, 1).split(' ').length
-puts entry.reading_chunk(40, 1).split(' ').length
-
-=end
 
 class GrammarStats
   def initialize
@@ -173,5 +152,22 @@ grammar_checker.check("This is a bad sentance3")
 grammar_checker.check("This is a good sentance!")
 
 puts grammar_checker.percentage_good
+
+Tests for reading_chuck
+
+entry = DiaryEntry.new("Gray Monday", "Still Monday, still gray! " * 1000)
+puts entry.count_words_diary_entry
+puts entry.reading_chunk(399, 10).length
+puts entry.reading_chunk(400, 20).length
+puts entry.reading_chunk(399, 10).length
+
+
+entry = DiaryEntry.new("Gray Monday", "Still Monday, still gray! " * 25)
+
+puts entry.count_words_diary_entry
+
+puts entry.reading_chunk(40, 1).split(' ').length
+puts entry.reading_chunk(40, 1).split(' ').length
+puts entry.reading_chunk(40, 1).split(' ').length
 
 =end
