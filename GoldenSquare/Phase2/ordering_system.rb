@@ -1,10 +1,6 @@
 require 'twilio-ruby'
 
-# TWILIO INFORMATION. REPLACE YOUR OWN CREDNTIALS IF YOU WANT TO RUN SMS FROM YOUR MACHINE.
-twilio_SID = ENV['twilio_SID']
-twilio_AUTH = ENV['twilio_AUTH']
-$client = Twilio::REST::Client.new(twilio_SID, twilio_AUTH)
-from = '+14406933831'
+
 
 
 menu = { 'Cheeseburger' => 7, 'Cheeseburger and Chips' => 10, 'Rum' => 3, 'Rum with ice' => 3.50, 
@@ -64,12 +60,18 @@ def take_order(food)
     if number == 'feed me'
       puts "Your food is on the way"
     else
+      # TWILIO INFORMATION. REPLACE YOUR OWN CREDNTIALS IF YOU WANT TO RUN SMS FROM YOUR MACHINE.
+      word = "Hello, World!"
+      twilio_SID = ENV['twilio_SID']
+      twilio_AUTH = ENV['twilio_AUTH']
+      client = Twilio::REST::Client.new(twilio_SID, twilio_AUTH)
+      from = '+14406933831'
       number = number.to_i
-      message = $client.accounts.messages.create {
+      client.messages.create(
         :from => from,
         :to => number,
-        :body => word,
-      }
+        :body => word
+      )
     end
   elsif choice == 'no'
     puts 'OK! See you next time!'
