@@ -66,7 +66,6 @@ def take_order(food)
       twilio_AUTH = ENV['twilio_AUTH']
       client = Twilio::REST::Client.new(twilio_SID, twilio_AUTH)
       from = '+14406933831'
-      number = number.to_i
       client.messages.create(
         :from => from,
         :to => number,
