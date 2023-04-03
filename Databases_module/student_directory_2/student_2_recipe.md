@@ -65,19 +65,20 @@ release_year: int
 -- Replace the table name, columm names and types.
 
 CREATE TABLE cohorts (
-  cohort_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name text,
   start_date date
 );
 
 CREATE TABLE students (
-  student_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name text
-  PRIMARY KEY (student_id),
-  CONSTRAINT fk_cohort_id
+  cohort_id = int,
+  CONSTRAINT fk_cohort
     FOREIGN KEY(cohort_id) 
-    REFERENCES cohorts(cohort_id)
+    REFERENCES cohorts(cohort_id) ON DELETE CASCADE
 );
+
 ```
 
 ## 5. Create the table.
