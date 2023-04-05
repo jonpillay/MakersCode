@@ -3,12 +3,12 @@ require 'sinatra/reloader'
 
 class Application < Sinatra::Base
   get '/' do
-    "This is a test"
+    return erb(:hello)
   end
 
   get '/hello' do
-    name = params[:name]
-    return "Hello! Your name is.... *inserts magical music*, #{name}!"
+    @name = params[:name]
+    return erb(:helloname)
   end
 
   get '/names' do

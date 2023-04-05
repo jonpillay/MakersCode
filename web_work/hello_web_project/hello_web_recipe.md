@@ -1,6 +1,4 @@
-# {{ METHOD }} {{ PATH}} Route Design Recipe
-
-_Copy this design recipe template to test-drive a Sinatra route._
+# get/sort names methods
 
 ## 1. Design the Route Signature
 
@@ -24,18 +22,9 @@ You'll need to include:
   * any query parameters (passed in the URL)
   * or body parameters (passed in the request body)
 
-## 2. Design the Response
-
-The route might return different responses, depending on the result.
-
-For example, a route for a specific blog post (by its ID) might return `200 OK` if the post exists, but `404 Not Found` if the post is not found in the database.
-
-Your response might return plain text, JSON, or HTML code. 
-
-_Replace the below with your own design. Think of all the different possible responses your route will return._
+## 2. The Response
 
 ```html
-<!-- EXAMPLE -->
 
 http://localhost:9292/names?names=['Julia', 'Mary', 'Karim']
 
@@ -62,9 +51,8 @@ Alice,Joe,Julia,Kieran,Zoe
 
 ```
 
-## 3. Write Examples
+## 3. Examples
 
-_Replace these with your own design._
 
 ```
 # Request:
@@ -93,7 +81,28 @@ Returns the names sorted as a string => "Alice,Joe,Julia,Kieran,Zoe"
 
 ```
 
-## 4. Encode as Tests Examples
+## Sequence Diagram
+
+```mermaid
+sequenceDiagram
+  participant Cl as Client
+  participant Rac as Rackup
+  participant App as Application Class
+  participant GET as GET / (route block)
+  Cl ->> Rac: HTTP Request with Params (names)
+  Rac ->> App: Forwards request
+  App ->> GET: Packages Request for Database
+  GET ->> App: Sends back raw data from table
+  App ->> Rac: Packs into program objs
+  Rac ->> Cl: Returns data in form ready for rendering
+
+```
+
+## Same sequence diagram, but rendered on Mermaid live.
+
+[![](https://mermaid.ink/img/pako:eNpdkU1rAjEQhv_KkJMFS-85CEX7cRT1uJfZ7Kymm022kwQR8b93RqmIl83CPPO-D8nZuNSRsSbTb6XoaOVxzzg2EWBCLt75CWOBZQDM8vUUy_Nsg06Hcgx1eh6-T5MO5QjeYfEpSgrm_Mx9feyU0-MNZpxqIWhDcsOLklL_ulhohYXv3W4NG9XNBY6-HGCNYpxhFnGkfOVVSRek1sJn4iNyl4FvSwqolgLSZ2XfDbinfE_tE8MKC7aYSWm1usdtKUpWKzvAeIROOOg5jSB8oMfwq66GZ_CxJJg46d1Can_yo-UyWKkulWO-xfmoCqMIY3e62rCUEvu4N3MzEo_oO3m0s6Y0phxopMZY-e2oxxpKY5p4ERRrSdtTdMYWrjQ3dZL8_zc2tseQ6fIHnjGuFA?type=png)](https://mermaid.live/edit#pako:eNpdkU1rAjEQhv_KkJMFS-85CEX7cRT1uJfZ7Kymm022kwQR8b93RqmIl83CPPO-D8nZuNSRsSbTb6XoaOVxzzg2EWBCLt75CWOBZQDM8vUUy_Nsg06Hcgx1eh6-T5MO5QjeYfEpSgrm_Mx9feyU0-MNZpxqIWhDcsOLklL_ulhohYXv3W4NG9XNBY6-HGCNYpxhFnGkfOVVSRek1sJn4iNyl4FvSwqolgLSZ2XfDbinfE_tE8MKC7aYSWm1usdtKUpWKzvAeIROOOg5jSB8oMfwq66GZ_CxJJg46d1Can_yo-UyWKkulWO-xfmoCqMIY3e62rCUEvu4N3MzEo_oO3m0s6Y0phxopMZY-e2oxxpKY5p4ERRrSdtTdMYWrjQ3dZL8_zc2tseQ6fIHnjGuFA)
+
+## 4. Tests Examples
 
 ```ruby
 # EXAMPLE
@@ -139,7 +148,7 @@ describe Application do
 end
 ```
 
-## 5. Implement the Route
+## 5. Implementation
 
 ```ruby
 
