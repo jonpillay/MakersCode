@@ -40,6 +40,24 @@ class AlbumRepository
     return album
   end
 
+  def find_by_artist(artist_id)
+    #returns a list of a all albums by a specific artist
+    sql = 'SELECT id, title, release_year, artist_id FROM albums WHERE artist_id = $1;'
+    result_set = DatabaseConnection.exec_params(sql, [artist_id])
+    albums = []
+    p "this is the length"
+    p result_set.ntuples
+    for i in (0...result_set.ntuples) do
+      album = Album.new
+      album.id = result_set[i]['id'].to_i
+      album.title = result_set[i]['title']
+      album.release_year = result_set[i]['release_year']
+      album.artist_id = result_set[i]['artist_id'].to_i
+      albums << album
+    end
+    return albums
+  end
+
   def create(album)
     sql = 'INSERT INTO albums (title, release_year, artist_id) VALUES ($1, $2, $3);'
     result_set = DatabaseConnection.exec_params(sql, [album.title, album.release_year, album.artist_id])

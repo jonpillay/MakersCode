@@ -32,25 +32,34 @@ describe Application do
       
       # Assert the response status code and body.
       expect(response.status).to eq(200)
-      expect(response.body).to include "I Put a Spell on You"
+      expect(response.body).to include('<a href="/albums/2">Surfer Rosa</h1></a>')
+      expect(response.body).to include('<h2>Release Year: 1988</h2>')
+      expect(response.body).to include('<h2>Artist: Pixies</h2>')
+      expect(response.body).to include('<a href="/albums/3">Waterloo</h1></a>')
+      expect(response.body).to include('<h2>Release Year: 1980</h2>')
+      expect(response.body).to include('<h2>Artist: ABBA</h2>')
+      expect(response.body).to include('<a href="/albums/4">Super Trouper</h1></a>')
+      expect(response.body).to include('<a href="/albums/5">Bossanova</h1></a>')
     end
   end
 
-  context 'POST to /artist' do
+  context 'POST to /artists' do
     it "returns 200 with artists listed" do
       response = post('/artists', name: 'Wild nothing', genre: 'Indie')
 
       expect(response.status).to eq (200)
-      expect(get('/artists').body).to include "Wild nothing"
     end
   end
 
-  context 'GET to /artist' do
+  context 'GET to /artists' do
     it 'returns 200 with artists listed' do
       response = get('/artists')
       expect(response.status).to eq(200)
-      expect(response.body).to include "Pixies"
+      expect(response.body).to include('<a href="/artists/1">Pixies</a>')
+      expect(response.body).to include('<h2>Genre: Rock</h2>')
+      expect(response.body).to include('<a href="/artists/2">ABBA</a>')
+      expect(response.body).to include('<h2>Genre: Pop</h2>')
+      expect(response.body).to include('<a href="/albums/5">Bossanova</h1></a>')
     end
   end
-
 end
