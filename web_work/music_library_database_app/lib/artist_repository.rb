@@ -38,6 +38,13 @@ class ArtistRepository
     return artist
   end
 
+  def find_id_by_name(artist_name)
+    sql = 'SELECT id FROM artists WHERE lower(name) = $1;'
+    result_set = DatabaseConnection.exec_params(sql, [artist_name])
+
+    return result_set[0]['id'].to_i
+  end
+
   def create(artist)
     sql = 'INSERT INTO artists (name, genre) VALUES ($1, $2);'
     result_set = DatabaseConnection.exec_params(sql, [artist.name, artist.genre])
